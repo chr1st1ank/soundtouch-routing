@@ -12,6 +12,9 @@ jobs:
     name: Build Docker image and push to repositories
     runs-on: ubuntu-latest
     if: ${{ github.server_url }}/${{ github.repository }} == 'https://github.com/chr1st1ank/soundtouch-routing'
+    permissions:
+      contents: read
+      packages: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
