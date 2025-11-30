@@ -1,5 +1,7 @@
 # soundtouch-routing
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 Proxy setup for reaching Bose SoundTouch devices in a local network from a different subnet.
 
 ## Quick Start
@@ -67,3 +69,7 @@ To install everything and run the tests, best use uv, e.g.:
 uv sync
 uv run python tests/soundtouch_test.py
 ```
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
