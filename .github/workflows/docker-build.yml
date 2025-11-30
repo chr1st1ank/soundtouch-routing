@@ -3,6 +3,8 @@ name: Docker Build and Publish
 on:
   push:
     branches: [main]
+  release:
+    types: [published]
   schedule:
     - cron: "1 5 * * 0"
   pull_request:
@@ -50,8 +52,8 @@ jobs:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # build on feature branches, push only on main branch
-          push: ${{ github.ref == 'refs/heads/main' }}
+          # build on feature branches, push only on main branch or releases
+          push: ${{ github.ref == 'refs/heads/main' || github.event_name == 'release' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           no-cache: ${{ github.event_name == 'schedule' }}
