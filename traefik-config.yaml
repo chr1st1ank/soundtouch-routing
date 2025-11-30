@@ -1,0 +1,22 @@
+http:
+  routers:
+    soundtouch-8080:
+      entryPoints:
+        - port8080
+      rule: "PathPrefix(`/`)"
+      service: soundtouch-svc-8080
+    soundtouch-8090:
+      entryPoints:
+        - port8090
+      rule: "PathPrefix(`/`)"
+      service: soundtouch-svc-8090
+  services:
+    soundtouch-svc-8080:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.203:8080"
+
+    soundtouch-svc-8090:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.203:8090"
