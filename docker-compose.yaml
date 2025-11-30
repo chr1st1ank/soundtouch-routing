@@ -2,15 +2,9 @@ version: "3.8"
 
 services:
   traefik:
-    image: traefik:v3
+    build: .
     container_name: iot-proxy
     network_mode: host
-    command:
-      - --providers.docker=false
-      - --entrypoints.port8080.address=:8080
-      - --entrypoints.port8090.address=:8090
-      - --log.level=DEBUG
-      - --providers.file.filename=/etc/traefik/dynamic.yml
-    volumes:
-      - ./traefik-config.yaml:/etc/traefik/dynamic.yml:ro
+    environment:
+      - SOUNDTOUCH_HOST=192.168.5.203
     restart: unless-stopped

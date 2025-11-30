@@ -1,8 +1,14 @@
 FROM traefik:v3
 
-COPY traefik-config.yaml /etc/traefik/dynamic.yml
+# Install envsubst for environment variable substitution
+RUN apk add --no-cache gettext
 
-ENTRYPOINT ["traefik"]
+# Copy config template and entrypoint script
+COPY traefik-config.yaml /etc/traefik/dynamic.yml.template
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["--providers.docker=false", \
      "--entrypoints.port8080.address=:8080", \
      "--entrypoints.port8090.address=:8090", \
