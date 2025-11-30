@@ -39,3 +39,31 @@ docker compose up -d
 ```
 
 The docker-compose setup will build the image locally and use the same environment variable configuration as the pre-built image.
+
+## Development
+
+### Project Structure
+
+```text
+soundtouch-routing/
+├── docker/              # Docker image configuration
+│   ├── Dockerfile
+│   ├── docker-entrypoint.sh
+│   └── traefik-config.yaml
+├── tests/               # Test scripts for local development
+│   ├── soundtouch_test.py
+│   └── soundtouch_websocket_test.py
+├── docker-compose.yaml  # Compose configuration
+└── README.md
+```
+
+### Testing
+
+Python test scripts are available in the `tests/` folder to validate the proxy functionality. 
+These require the `libsoundtouch` library (see `pyproject.toml` for dependencies).
+To install everything and run the tests, best use uv, e.g.:
+
+```bash
+uv sync
+uv run python tests/soundtouch_test.py
+```
